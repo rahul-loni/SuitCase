@@ -27,6 +27,8 @@ Animation animation;
         binding.logo.setAnimation(animation);
         binding.txtSplash.setAnimation(animation);
 
+        getSupportActionBar().hide();
+
         //Splash Method
         Thread thread=new Thread(new Runnable() {
             @Override

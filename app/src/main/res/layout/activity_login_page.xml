@@ -21,7 +21,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:layout_marginTop="20dp"
         android:focusableInTouchMode="true"
         android:focusable="true">
@@ -29,7 +29,7 @@
         <EditText
             android:id="@+id/txt_login_email"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="70dp"
             android:hint="Enter Email"
             android:background="@color/white"
             android:inputType="text"/>
@@ -46,7 +46,7 @@
         <EditText
             android:id="@+id/txt_login_password"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="70dp"
             android:background="@color/white"
             android:hint="Enter Password"
             android:inputType="text"/>
@@ -55,7 +55,7 @@
     <Button
         android:id="@+id/login_btn"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="80dp"
         android:textColor="@color/white"
         android:text="Login"
         android:textStyle="bold"
