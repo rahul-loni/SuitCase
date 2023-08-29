@@ -34,6 +34,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return true;
         }
     }
+    public Boolean updatePassword(String email,String password){
+        SQLiteDatabase sqLiteDatabase=this.getWritableDatabase();
+        ContentValues contentValues=new ContentValues();
+        contentValues.put("email",email);
+        contentValues.put("password",password);
+        Long Result=sqLiteDatabase.update("Users",null,contentValues);
+        if (Result==-1){
+            return  false;
+        }else {
+            return true;
+        }
+
+    }
     public Boolean checkEmail(String email){
      SQLiteDatabase sqLiteDatabase=this.getWritableDatabase();
         Cursor cursor=sqLiteDatabase
