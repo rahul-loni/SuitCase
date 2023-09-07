@@ -1,11 +1,13 @@
 package com.example.suitcase;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 import android.renderscript.Sampler;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -33,7 +35,7 @@ public class Items_DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
     String sqlQuery="CREATE TABLE " +" TABLE_NAME "+"("+
-            COLUMN_ID+ "INTEGER PRIMARY KEY AUTOINCREMENT ,"+
+            COLUMN_ID+ "INTEGER PRIMARY KEY AUTOINCREMENT,"+
             NAME + "TEXT NOT NULL," +
             PRICE + "TEXT NOT NULL," +
             DESCRIPTION + "TEXT," +
@@ -71,5 +73,40 @@ public class Items_DBHelper extends SQLiteOpenHelper {
         long result=sqLiteStatement.executeInsert();
         database.close();
         return result!=-1;
+    }
+    public Cursor getElementById(int id ){
+        SQLiteDatabase  database=getWritableDatabase();
+        String sqlQuery="SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_ID +"=?";
+        return database.rawQuery(sqlQuery,new String[]{String.valueOf(id)});
+    }
+    public Cursor getAll(){
+        SQLiteDatabase database=getReadableDatabase();
+        String sqlQuery="SELECT*FROM " + TABLE_NAME;
+        return database.rawQuery(sqlQuery,null);
+    }
+    public Boolean update(
+            int id,
+            String name,
+            String price,
+            String description,
+            String image,
+            String purchased
+    ){
+        SQLiteDatabase database=getWritableDatabase();
+        ContentValues cv=new ContentValues();
+        cv.put(NAME,name);
+        cv.put(PRICE,price);
+        cv.put(DESCRIPTION,description);
+        cv.put(IMAGE,image);
+        cv.put(PURCHASED,purchased);
+        int result=database.update(TABLE_NAME,cv,COLUMN_ID+"=?",
+                new String[]{String.valueOf(id)});
+        Log.d("Database helper:","result"+result);
+        database.close();
+        return result !=-1;
+    }
+    public void delete(long id){
+        SQLiteDatabase database=getWritableDatabase();
+        database.delete(TABLE_NAME,COLUMN_ID+"=?",new String[]{String.valueOf(id)});
     }
 }
