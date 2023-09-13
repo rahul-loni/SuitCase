@@ -10,7 +10,7 @@
     android:gravity="center"
     tools:context=".Add_Items">
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/items_img"
+        android:id="@+id/item_img"
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:src="@drawable/logo1"
@@ -44,7 +44,7 @@
 
         />
     <Button
-        android:id="@+id/add_items"
+        android:id="@+id/add_item"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:text="Click to Add Items "

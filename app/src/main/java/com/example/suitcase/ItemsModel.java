@@ -58,7 +58,7 @@ public class ItemsModel {
         return purchased;
     }
 
-    public void setPurchased(boolean purchased) {
+    public void setPurchased(boolean purchased)  {
         this.purchased = purchased;
     }
         public String toString () {

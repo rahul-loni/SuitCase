@@ -56,7 +56,7 @@ public class Items_DBHelper extends SQLiteOpenHelper {
     }
     public Boolean insert(
             String name,
-            String price,
+            double price,
             String description,
             String image,
             String purchased
@@ -66,7 +66,7 @@ public class Items_DBHelper extends SQLiteOpenHelper {
         SQLiteStatement sqLiteStatement=database.compileStatement(sql);
         sqLiteStatement.clearBindings();;
         sqLiteStatement.bindString(1,name);
-        sqLiteStatement.bindString(2,price);
+        sqLiteStatement.bindDouble(2,price);
         sqLiteStatement.bindString(3,description);
         sqLiteStatement.bindString(4,image);
         sqLiteStatement.bindString(5, purchased   );
@@ -87,7 +87,7 @@ public class Items_DBHelper extends SQLiteOpenHelper {
     public Boolean update(
             int id,
             String name,
-            String price,
+            double price,
             String description,
             String image,
             String purchased

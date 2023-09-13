@@ -10,14 +10,25 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.example.suitcase.Adapter.RecyclerItemsClickView;
 import com.example.suitcase.databinding.ActivityMainBinding;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
+    FloatingActionButton fab;
+    private DatabaseHelper databaseHelper;
+    private RecyclerItemsClickView recyclerItemsClickView;
+    private Adapter adapter;
+    private NavigationView navigationView;
+    private ArrayList<ItemsModel> itemsModels;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
