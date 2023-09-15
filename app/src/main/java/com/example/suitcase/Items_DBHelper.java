@@ -59,7 +59,7 @@ public class Items_DBHelper extends SQLiteOpenHelper {
             double price,
             String description,
             String image,
-            String purchased
+            boolean purchased
     ){
         SQLiteDatabase database=getWritableDatabase();
         String sql="INSERT INTO " +TABLE_NAME+ " VALUES (NULL,?,?,?,?,?)";
@@ -69,7 +69,7 @@ public class Items_DBHelper extends SQLiteOpenHelper {
         sqLiteStatement.bindDouble(2,price);
         sqLiteStatement.bindString(3,description);
         sqLiteStatement.bindString(4,image);
-        sqLiteStatement.bindString(5, purchased   );
+        sqLiteStatement.bindLong(5, purchased? 1:0);
         long result=sqLiteStatement.executeInsert();
         database.close();
         return result!=-1;

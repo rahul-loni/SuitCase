@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,7 +26,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
     FloatingActionButton fab;
-    private DatabaseHelper databaseHelper;
+    private Items_DBHelper items_dbHelper;
     private RecyclerItemsClickView recyclerItemsClickView;
     private Adapter adapter;
     private NavigationView navigationView;
@@ -36,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
 
+
+        //Nav Menu Item Click
         binding.nav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -59,13 +63,33 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //initialize data
+        itemsModels=new ArrayList<>();
+        items_dbHelper=new Items_DBHelper(this);
+        setRecyclerView();
+        setupItemTouchHelper();
+        binding.fab.setOnClickListener(view->startActivity(Add_Items.getIntent(getApplicationContext())));
+    }
+    private void setupItemTouchHelper(){
+        ItemTouchHelper itemTouchHelper=new ItemTouchHelper(
+                new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT|ItemTouchHelper.RIGHT) {
+                    @Override
+                    public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                        return false;
+                    }
 
-        binding.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(getApplicationContext(),Add_Items.class);
-                startActivity(intent);
-            }
-        });
+                    @Override
+                    public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                        int position=viewHolder.getAdapterPosition();
+                        ItemsModel itemsModel=itemsModels.get(position);
+                        if (direction==ItemTouchHelper.LEFT){
+                            items_dbHelper.delete(itemsModel.getId());
+                            itemsModels.remove(position);
+                            //adepter
+                            Toast.makeText(MainActivity.this, "Item Deleted", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+        );
     }
 }
