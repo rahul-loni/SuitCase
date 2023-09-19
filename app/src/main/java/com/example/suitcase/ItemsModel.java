@@ -2,8 +2,6 @@ package com.example.suitcase;
 
 import android.net.Uri;
 
-import androidx.annotation.NonNull;
-
 public class ItemsModel {
     private int id;
     private String name;
