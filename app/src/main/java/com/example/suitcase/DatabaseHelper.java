@@ -39,7 +39,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues contentValues=new ContentValues();
         contentValues.put("email",email);
         contentValues.put("password",password);
-        Long Result=sqLiteDatabase.update("Users",null,contentValues);
+        int Result=sqLiteDatabase.update("Users",null,contentValues);
         if (Result==-1){
             return  false;
         }else {

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="20dp"
-    tools:context=".Itmes_Details_Page">
+    tools:context=".Items_Details_Page">
 
     <ImageView
         android:id="@+id/imageViewItem"

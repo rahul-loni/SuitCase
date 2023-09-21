@@ -13,11 +13,8 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
-import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.suitcase.Adapter.ItemsAdapter;
@@ -134,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private void setRecyclerView(){
         itemsAdapter=new ItemsAdapter(itemsModels,
-                (view ,position)->startActivity(Itmes_Details_Page.getIntent(
+                (view ,position)->startActivity(Items_Details_Page.getIntent(
                         getApplicationContext(),
                         itemsModels.get(position).getId())
                 ));

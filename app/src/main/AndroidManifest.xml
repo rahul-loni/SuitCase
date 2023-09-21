@@ -12,10 +12,13 @@
         android:theme="@style/Theme.SuitCase"
         tools:targetApi="31">
         <activity
+            android:name=".EditItem"
+            android:exported="false" />
+        <activity
             android:name=".ResetPassword"
             android:exported="false" />
         <activity
-            android:name=".Itmes_Details_Page"
+            android:name=".Items_Details_Page"
             android:exported="false" />
         <activity
             android:name=".Add_Items"
