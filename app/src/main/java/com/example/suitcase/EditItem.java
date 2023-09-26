@@ -1,11 +1,13 @@
 package com.example.suitcase;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -88,7 +90,28 @@ ActivityEditItemBinding binding;
         String description= binding.editItemDescription.getText().toString().trim();
         if (description.isEmpty()){
             binding.editItemDescription.setError("Description is empty ");
-            binding.editItemDescription.requestFocus(); 1
+            binding.editItemDescription.requestFocus(); 
         }
+        Log.d("EditItem","saving : {"+ "id:"+id+",name:"+name+",price:"+price+"" +
+                ",description:"+description+",imageUri:"+imageUri.toString()+"" +
+                ",isPurchased:"+isPurchased+"}");
+        if (items_dbHelper.update(id,name,price,description,imageUri.toString(),isPurchased)){
+            Toast.makeText(this, "Saves Successfully", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+        }else {
+            Toast.makeText(this, "Failed to save ", Toast.LENGTH_SHORT).show();
+        }
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (data!=null){
+            imageUri=data.getData();
+            binding.editItemImage.setImageURI(imageUri);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+    @Override
+    public void finish(){
+        super.finish();
     }
 }
