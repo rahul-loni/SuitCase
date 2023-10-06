@@ -32,7 +32,7 @@ public class Items_Details_Page extends AppCompatActivity {
         return intent;
     }
     ItemsModel item;
-    Items_DBHelper itemsDbHelper;
+    DatabaseHelper itemsDbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,16 +41,16 @@ public class Items_Details_Page extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         item=new ItemsModel();
-        itemsDbHelper=new Items_DBHelper(this);
+        itemsDbHelper=new DatabaseHelper(this);
 
         Bundle bundle=getIntent().getExtras();
         int id=bundle.getInt(Items_Details_Page.ID);
-        Log.d("Items_Detail_Page",id+"");
+        Log.d("Items_Detail_Page: id:",id+"");
 
         item=retrieveData(id);
         binding.imageViewItem.setImageURI(item.getImage());
         binding.textViewName.setText(item.getName());
-        binding.textViewPrice.setText(item.getPrice().toString());
+        //binding.textViewPrice.setText(item.getPrice().toString());
         binding.textViewDescription.setText(item.getDescription());
 
         //click Method of Edit Button
@@ -64,7 +64,7 @@ public class Items_Details_Page extends AppCompatActivity {
         startActivity(EditItem.getIntent(getApplicationContext(),item));
     }
     private ItemsModel retrieveData(int id) {
-        Cursor cursor=itemsDbHelper.getElementById(id);
+        Cursor cursor=itemsDbHelper.getItemById(id);
         cursor.moveToNext();
         ItemsModel itemsModel=new ItemsModel();
         itemsModel.setId(cursor.getInt(0));

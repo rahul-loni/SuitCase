@@ -19,7 +19,7 @@ public class Login_Page extends AppCompatActivity {
         setContentView(binding.getRoot());
         getSupportActionBar().hide();
 
-        databaseHelper=new DatabaseHelper(this);
+        databaseHelper= new DatabaseHelper(this);
 
         binding.loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -22,7 +22,7 @@ ActivityEditItemBinding binding;
     public static final String IMAGE="image";
     public static final String IS_PURCHASED="purchased";
 
-    private Items_DBHelper items_dbHelper;
+    private DatabaseHelper items_dbHelper;
     private Uri imageUri;
     private int id;
     private boolean isPurchased;
@@ -44,7 +44,7 @@ ActivityEditItemBinding binding;
         binding=ActivityEditItemBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        items_dbHelper=new Items_DBHelper(this);
+        items_dbHelper=new DatabaseHelper(this);
         Bundle bundle=getIntent().getExtras();
         id=bundle.getInt(Items_Details_Page.ID);
         isPurchased=bundle.getBoolean(Items_Details_Page.IS_PURCHASED);

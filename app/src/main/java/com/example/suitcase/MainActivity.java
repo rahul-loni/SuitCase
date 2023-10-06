@@ -27,11 +27,9 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
-    FloatingActionButton fab;
-    private Items_DBHelper items_dbHelper;
+    private DatabaseHelper items_dbHelper;
     private RecyclerItemsClickView recyclerItemsClickView;
     private ItemsAdapter itemsAdapter;
-    private NavigationView navigationView;
     private ArrayList<ItemsModel> itemsModels;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
         //initialize data
         itemsModels=new ArrayList<>();
-        items_dbHelper=new Items_DBHelper(this);
+        items_dbHelper=new DatabaseHelper(this);
         setRecyclerView();
         setupItemTouchHelper();
         binding.fab.setOnClickListener(view->startActivity(Add_Items.getIntent(getApplicationContext())));
@@ -81,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
                         int position=viewHolder.getAdapterPosition();
                         ItemsModel itemsModel=itemsModels.get(position);
                         if (direction==ItemTouchHelper.LEFT){
-                            items_dbHelper.delete(itemsModel.getId());
+                            items_dbHelper.deleteItem(itemsModel.getId());
                             itemsModels.remove(position);
                             itemsAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
                             Toast.makeText(MainActivity.this, "Item Deleted", Toast.LENGTH_SHORT).show();
@@ -110,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
         retrieveData();
     }
     private void retrieveData(){
-        Cursor cursor=items_dbHelper.getAll();
+        Cursor cursor=items_dbHelper.getAllItem();
         if (cursor==null){
             return;
         }
