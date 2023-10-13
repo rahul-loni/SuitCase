@@ -50,7 +50,7 @@ public class Items_Details_Page extends AppCompatActivity {
         item=retrieveData(id);
         binding.imageViewItem.setImageURI(item.getImage());
         binding.textViewName.setText(item.getName());
-        //binding.textViewPrice.setText(item.getPrice().toString());
+        binding.textViewPrice.setText(String.valueOf(item.getPrice()));
         binding.textViewDescription.setText(item.getDescription());
 
         //click Method of Edit Button

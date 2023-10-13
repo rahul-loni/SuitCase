@@ -12,6 +12,7 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
+    //create variable for database name ,database table and column
     public static final String DB_NAME = "SuitCase.db";
     public static final int DB_VERSION = 1;
     public static final String USER_EMAIL = "email";
@@ -26,16 +27,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String ITEM_IMAGE = "image";
     public static final String ITEM_PURCHASED = "purchased";
 
+    //context for connection other class
     public DatabaseHelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
+
+    //Create Database SqlQuery
     @Override
     public void onCreate(SQLiteDatabase db) {
+        //User Create Method
         String userTableSqlQuery = "CREATE TABLE " + USER_TABLE_NAME + "(" +
                 USER_EMAIL + " TEXT PRIMARY KEY, " +
                 USER_PASSWORD + " TEXT)";
-
+//Items Create Method
         String itemTableSqlQuery = "CREATE TABLE " + ITEM_TABLE_NAME + " (" +
                 ITEM_COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 ITEM_NAME + " TEXT NOT NULL, " +
@@ -59,6 +64,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+
+    //save user detail in database (create new users)
     public Boolean insertUsers(String email, String password) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -72,6 +79,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+
+    //Update Password
     public Boolean updatePassword(String email, String password) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -86,6 +95,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    //Verify Email for forget Password
     public Boolean checkEmail(String email) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         Cursor cursor = sqLiteDatabase
@@ -96,7 +106,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return false;
         }
     }
-
+//check both email and password for forget password
     public Boolean checkEmailPassword(String email, String password) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         Cursor cursor = sqLiteDatabase
@@ -112,6 +122,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase database = getWritableDatabase();
         return database.rawQuery(sqlQuery, null);
     }
+
+
+    //save new Items in Database
 
     public Boolean insertItem(String name,
                               double price,
@@ -133,6 +146,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return result != -1;
     }
 
+    //get data from database table and column data
     public Cursor getItemById(int id) {
         SQLiteDatabase database = getWritableDatabase();
 
@@ -143,12 +157,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         );
     }
 
+
+    //get all Data
     public Cursor getAllItem() {
         SQLiteDatabase database = getReadableDatabase();
         String sqlQuery = "SELECT * FROM " + ITEM_TABLE_NAME;
         return database.rawQuery(sqlQuery, null);
     }
 
+
+    //Edit Items detail method
     public Boolean update(
             int id,
             String name,
@@ -170,6 +188,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return result != -1;
     }
 
+
+    //delete Items from database
     public void deleteItem(long id) {
         SQLiteDatabase database = getWritableDatabase();
         database.delete(

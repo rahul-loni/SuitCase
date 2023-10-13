@@ -10,13 +10,11 @@
         android:layout_height="300dp"
         android:backgroundTint="#846746"
         app:cardCornerRadius="10dp"
-        app:cardElevation="10dp"
-        android:padding="10dp">
-        <LinearLayout
+        app:cardElevation="10dp">
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="10dp"
             android:gravity="center">
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/item_image"
@@ -58,7 +56,7 @@
                 android:layout_below="@id/item_price"
                 android:layout_marginTop="5dp"
                 />
-        </LinearLayout>
+        </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
 </RelativeLayout>

@@ -18,6 +18,7 @@ import com.example.suitcase.R;
 import java.util.ArrayList;
 
 public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHolder> {
+    //import RecyclerItemsClickView
     private final RecyclerItemsClickView recyclerItemsClickView;
     private ArrayList<ItemsModel> itemsModels;
 
@@ -33,7 +34,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHold
                 .inflate(R.layout.single_item,parent,false);
         return new ItemViewHolder(view);
     }
-
+// Binding  holder method
     @Override
     public void onBindViewHolder(@NonNull ItemsAdapter.ItemViewHolder holder, int position) {
         ItemsModel itemsModel=itemsModels.get(position);
@@ -49,6 +50,8 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHold
         }
     }
 
+
+    // items count
     @Override
     public int getItemCount() {
         return itemsModels.size();
@@ -56,7 +59,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHold
     public class ItemViewHolder extends RecyclerView.ViewHolder{
         ImageView imageView;
         TextView txt_name,txt_price,txt_description;
-
+// connection between xml to bind
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView=itemView.findViewById(R.id.item_image);
@@ -65,6 +68,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHold
             txt_description=itemView.findViewById(R.id.item_dis);
             itemView.setOnClickListener(this::itemViewOnClick);
         }
+        //recycler click view
         private void itemViewOnClick(View view){
             recyclerItemsClickView.onItemClick(view,getAdapterPosition());
         }

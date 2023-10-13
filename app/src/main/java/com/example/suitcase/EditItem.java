@@ -27,6 +27,8 @@ ActivityEditItemBinding binding;
     private int id;
     private boolean isPurchased;
 
+
+    //put date from model class
     public static Intent getIntent(Context context,ItemsModel itemsModel){
         Intent intent=new Intent(context,EditItem.class);
         intent.putExtra(ID ,itemsModel.getId());
@@ -66,9 +68,11 @@ ActivityEditItemBinding binding;
         binding.editItemImage.setOnClickListener(this::pickImage);
         binding.btnEdit.setOnClickListener(this::saveItem);
     }
+    //pick image from internal storage
     private void pickImage(View view){
         ImagePickUtility.pickImage(view,EditItem.this);
     }
+    //create and save new updated detail 
     private void saveItem(View view){
         String name=binding.editItemName.getText().toString().trim();
         if (name.isEmpty()){

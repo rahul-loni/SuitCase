@@ -16,6 +16,7 @@ public class Add_Items extends AppCompatActivity {
     ActivityAddItemsBinding binding;
     DatabaseHelper items_dbHelper;
     private Uri imageUri;
+    //intent method for click and jump to anther activity
     public static Intent getIntent(Context context) {
         return new Intent(context, Add_Items.class);
     }
@@ -33,12 +34,16 @@ public class Add_Items extends AppCompatActivity {
 
     }
 
+
+    //Add Item Method and form validation also
     private void saveItem(View view) {
+        //Item Name
         String name = binding.itemName.getText().toString().trim();
         if (name.isEmpty()) {
             binding.itemName.setError("Name field is empty");
             binding.itemName.requestFocus();
         }
+        //Item Price
         double price = 0;
         try {
             price = Double.parseDouble(binding.itemPrice.getText().toString().trim());
@@ -52,6 +57,7 @@ public class Add_Items extends AppCompatActivity {
             binding.itemPrice.setError("price should be greater than 0 . ");
             binding.itemPrice.requestFocus();
         }
+        //Item Description
         String description = binding.itemDescription.getText().toString().trim();
         if (description.isEmpty()) {
             binding.itemDescription.setError("Description is empty ");
@@ -62,11 +68,13 @@ public class Add_Items extends AppCompatActivity {
             finish();
         }
     }
-
+//Pick image from emulator internal storage and camera
     private void pickImage(View view) {
         ImagePickUtility.pickImage(view, Add_Items.this);
     }
 
+
+    //set image uri
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (data != null) {
